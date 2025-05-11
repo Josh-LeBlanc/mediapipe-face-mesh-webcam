@@ -23,6 +23,7 @@ if not cap.isOpened():
 # Get video properties for the output window
 frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+frame_pythagorean = (frame_height**2 + frame_width**2)**.5
 
 # Define landmark display properties
 # LANDMARK_COLOR = (0, 255, 0)
@@ -70,7 +71,7 @@ while True:
                 y = int(landmark.y * frame_height)
                 
                 # Get color for this landmark
-                landmark_color = color_function((x**2 + y**2)**.5, (frame_width**2 + frame_height**2)**.5)
+                landmark_color = color_function((x**2 + y**2)**.5, frame_pythagorean)
                 
                 # Draw the landmark point
                 cv2.circle(display_image, (x, y), LANDMARK_SIZE, landmark_color, -1)
